@@ -1,0 +1,72 @@
+# ------------------- OS -------------------
+alias nba="nano ~/.bash_aliases"
+alias o="open "
+alias rscp="rsync --partial --progress --rsh=ssh "
+alias fp="lsof -n -i $1"
+
+# ------------------- Git -------------------
+alias gcn="git clone $1"
+alias gi="git init && git add -A && git commit -m $1"
+
+alias gs="git status"
+alias gf="git fetch"
+alias ga="git add "
+alias gaa="git add ."
+alias gc="git commit -m $1"
+alias gc="git commit --amend"
+alias gac="git add -A && git commit -m $1"
+
+alias gp="git push origin $1"
+alias gpd="git push origin dev"
+alias gpm="git push origin main"
+alias gpl="git pull origin $1"
+
+alias gacp="git add . && git commit -m $1 && git push origin main"
+
+alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+alias wip="git add . && git commit -m 'wip'"
+alias nah="git reset --hard && git clean -df"
+
+alias gt="git tag"
+alias gpt="git push origin --tags"
+
+alias gbl="git branch -a"
+alias gb="git checkout $1"
+alias gbn="git checkout -b $1"
+alias gbm="git checkout main"
+alias gbd="git checkout dev"
+alias gm="git merge "
+
+alias gss="git stash"
+alias gsp="git stash pop"
+alias grc="git rm -rf --cached ."
+
+# ------------------- Laravel -------------------
+alias ptest="phpunit"
+alias pf="phpunit --filter "
+alias art="php artisan"
+alias migrate="php artisan migrate"
+alias fresh="php artisan migrate:fresh"
+alias seed="php artisan migrate:fresh && php artisan db:seed"
+alias serve="php artisan serve"
+alias lrc="rm -rf storage/framework/cache/*"
+alias lrv="rm -rf storage/framework/views/*"
+alias ll="tail -f storage/logs/laravel.log"
+llc () {
+    tail -f storage/logs/laravel.log | awk '
+                {matched=0}
+                /INFO:/    {matched=1; print "\033[0;37m" $0 "\033[0m"}   # WHITE
+                /NOTICE:/  {matched=1; print "\033[0;36m" $0 "\033[0m"}   # CYAN
+                /WARNING:/ {matched=1; print "\033[0;34m" $0 "\033[0m"}   # BLUE
+                /ERROR:/   {matched=1; print "\033[0;31m" $0 "\033[0m"}   # RED
+                /ALERT:/   {matched=1; print "\033[0;35m" $0 "\033[0m"}   # PURPLE
+                matched==0            {print "\033[0;33m" $0 "\033[0m"}   # YELLOW
+        '
+}
+alias dum="composer dump"
+alias pserve="php -S localhost:8000 -t ."
+alias plserve="php -S localhost:8000 -t public"
+
+# ------------------- PHP -------------------
+alias ps="php -S localhost:8000 -t $1"
